@@ -1,0 +1,68 @@
+#include<iostream>
+
+using namespace std;
+
+class TreeNode{
+ public:
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+TreeNode* newnode(int value){
+    TreeNode* temp = new TreeNode();
+    temp->data=value;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+
+
+
+TreeNode* constructBinaryTree(int pre[],int post[],int* preStartindex,int l,int h,int size){
+      if(l>h  && *preStartindex>size) return NULL;
+      
+      
+      TreeNode* root = newnode(pre[*preStartindex]);
+      ++*preStartindex;
+      if(l==h) return root;
+      
+      int i;
+      for(i=l;i<=h;i++){
+          if(post[i]==pre[*preStartindex]){
+              break;
+          }
+      }
+      
+      if(i<=h){
+          root->left = constructBinaryTree(pre,post,preStartindex,l,i,size);
+          root->right = constructBinaryTree(pre,post,preStartindex,i+1,h-1,size);
+      }
+      
+      return root;
+}
+
+
+TreeNode* constructTree(int pre[],int post[],int size){
+    int preStartindex=0;
+    return constructBinaryTree(pre,post,&preStartindex,0,size-1,size);
+} 
+
+
+void printOrder(TreeNode* root){
+    
+    if(root==NULL) return;
+         
+    printOrder(root->left);
+    printOrder(root->right);
+    cout<<root->data<<" ";
+};
+
+int main(){
+    
+    int pre[] = {1, 2, 4, 8, 9, 5, 3, 6, 7};
+	int post[] = {8, 9, 4, 5, 2, 6, 7, 3, 1};
+    int size = sizeof(pre)/sizeof(pre[0]);
+    TreeNode* root = constructTree(pre,post,size);
+    printOrder(root);
+    return 0;
+}
