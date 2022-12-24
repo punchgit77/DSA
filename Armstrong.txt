@@ -1,0 +1,53 @@
+
+#include <iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int powerer(int a,int b){
+            if(b==0) return 1;
+            int p=powerer(a,b/2);
+           
+               if(b&1){
+                   return p*p*a;
+               }
+        return p*p;
+    }
+    
+
+
+int main(){
+  int n;
+  cin>>n;
+  if(n==0) {
+      return 0;
+  }
+    int temp = n;
+    int n1  = n;
+    int remain = 0;
+    int count=0;
+    int armstrong=0;
+    
+    while(n!=0){
+        n=n/10;
+        count++;
+    }
+
+         int c = count;
+        int po = 0;
+        while(n1!=0){
+         remain=n1%10;
+         po = powerer(remain,c);
+         armstrong= armstrong + po ;
+         n1=n1/10;
+         po=0;
+    }
+    if(temp==armstrong){
+        cout<<"it is an armstrong number"<<endl;
+    }
+    else{
+        cout<<"it is not an armstrong number"<<endl;
+    }
+
+    return 0;
+}
