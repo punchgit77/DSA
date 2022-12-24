@@ -1,0 +1,129 @@
+
+#include <iostream>
+
+using namespace std;
+
+
+struct Node{
+    int data;
+    struct Node* left = NULL;
+    struct Node* right = NULL;
+       Node(int val)
+    {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+    
+};
+
+struct Node* newnode(int data){
+    struct Node* node;
+    node->data=data;
+    node->left = NULL;
+    node->right=NULL;
+    return node;
+}
+
+void preorder(struct Node* root){
+    if(root==NULL){
+        return;
+    }
+    
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+    
+}
+
+void inorder(struct Node* root){
+    if(root==NULL){
+        return;
+    }
+    
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+    
+}
+void postorder(struct Node* root){
+    if(root==NULL){
+        return;
+    }
+    
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<" ";
+    
+}
+
+int sumofTree(struct Node* root){
+    if(root==NULL){
+        return 0;
+    }
+    
+    return root->data+sumofTree(root->left)+sumofTree(root->right);
+}
+
+int heighOfTree(struct Node* root){
+    if(root==NULL){
+        return 0;
+    }
+    int leftHeight = heighOfTree(root->right);
+    int rHeight = heighOfTree(root->right);
+    
+    return leftHeight+rHeight+1;
+}
+
+int diameterOfTree(struct Node* root){
+    
+    if(root==NULL){
+        return 0;
+    }
+    
+    int lheight = heighOfTree(root->left);
+    int rHeight = heighOfTree(root->right);
+    int currDia = lheight+rHeight+1;
+    int ldiameter = diameterOfTree(root->left);
+    int rdiameter = diameterOfTree(root->right);
+    
+    return max(currDia,max(ldiameter,rdiameter));
+}
+
+int countNodes(struct Node *root){
+    
+    if(root==NULL){
+        return 0;
+          }
+    return countNodes(root->left) + countNodes(root->right) + 1;
+}
+
+
+
+
+int main()
+{
+    struct Node* root = new Node(1);
+     
+     root->left=new Node(2);
+     root->right=new Node(3);
+     
+     root->left->left= new Node(4);
+     root->left->right=new Node(5);
+     
+     root->right->left= new Node(6);
+     root->right= new Node(7);
+     cout<<"preorder traversal is : ";
+     preorder(root);
+     cout<<endl<<"inorder traversal is : ";
+     inorder(root);
+     cout<<endl<<"postorder traversal is : ";
+     postorder(root);
+     cout<<endl<<"sum of tree is : ";
+     cout<<sumofTree(root)<<endl;
+     cout<<"height of tree is: "<<heighOfTree(root)<<endl;;    
+     cout<<"diamater of tree is : "<<diameterOfTree(root)<<endl;
+     cout<<"number of the nodes are : "<<countNodes(root)<<endl;
+     
+    return 0;
+}
