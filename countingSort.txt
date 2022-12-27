@@ -1,0 +1,50 @@
+
+#include <iostream>
+#include<cstring>
+
+using namespace std;
+
+int main()
+{
+   int countArr[11];
+   memset(countArr,0,sizeof(countArr));
+   int arr[] = {0,9,8,2,1,1,7,8,9};
+   int n = sizeof(arr)/sizeof(arr[0]);
+   
+   cout<<"\nOriginal array is : ";
+   for(int i=0;i<n;i++){
+       cout<<arr[i]<<" ";
+   }
+  for(int i=0;i<n;i++){
+     countArr[arr[i]]++;
+  }
+  cout<<"\narray after counting : ";
+   for(int i=0;i<10;i++){
+       cout<<countArr[i]<<" ";
+   }
+   
+   for(int i=1;i<10;i++){
+       countArr[i] = countArr[i]+countArr[i-1];
+   }
+   
+   cout<<"\narray after suming the count : ";
+   for(int i=0;i<10;i++){
+       cout<<countArr[i]<<" ";
+   }
+   
+   int newArrforSortingElements[n];
+   for(int i=n-1;i>=0;i--){
+        newArrforSortingElements[--countArr[arr[i]]] = arr[i];
+   }
+   
+   for(int i=0;i<n;i++){
+       arr[i] = newArrforSortingElements[i];
+   }
+   
+   
+   cout<<"\narray after counting sort is : ";
+   for(int i=0;i<n;i++){
+       cout<<arr[i]<<" ";
+   }
+
+}
