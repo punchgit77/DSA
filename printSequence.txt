@@ -1,0 +1,25 @@
+
+#include<iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+//115 112 108 103 97........
+
+
+int main(){
+    int n = 115;
+    int p = n;
+    int differncee = 2;
+    int count=0,sum=0;
+    for(int i=n;i>=107;i--){
+           cout<<p<<" ";
+           differncee+=1;
+           sum+=p;
+           p = p - differncee;
+           count++;
+    }
+    cout<<"\n";
+    cout<<"sum :"<<sum<<" avg : "<<ceil(sum/count);
+    return 0;
+}
