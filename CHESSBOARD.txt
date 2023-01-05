@@ -1,0 +1,30 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    string s;
+    cin>>s;  
+        if((s[0]-'a')%2==0 && (s[0]-'a')<8){
+                    if(s[1]%2==0 && s[1]<8){
+                        cout<<"White";
+                    }
+                    else{
+                        cout<<"Black";
+                    }
+           }
+       
+        else if((s[0]-'a')%2!=0){
+                    if(s[1]%2==0){
+                        cout<<"Black";
+                    }
+                    else{
+                        cout<<"White";
+                    }
+           }
+    return 0;
+}
