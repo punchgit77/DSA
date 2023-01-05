@@ -1,0 +1,37 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+void addEdges(vector<vector<int>>& adjancency,int x,int y){
+      adjancency[x].push_back(y);
+      adjancency[y].push_back(x);
+}
+
+int ans = 0;
+void getDepth(vector<vector<int>>& adjancency,int depth,int node,int par ){
+          ans+=depth;
+          for(auto it : adjancency[node]){
+              if(it!=par){
+                    getDepth(adjancency,depth+1,it,node);
+              }
+          }
+}
+
+int main() {
+
+    int NumberOfNodes;
+    cin>>NumberOfNodes;
+   vector<vector<int>> adjancency(NumberOfNodes+1);
+
+    for(int i=1;i<NumberOfNodes;i++){
+          int a,b;
+          cin>>a>>b;
+          addEdges(adjancency,a,b);
+    }   
+    getDepth(adjancency,0,1,-1);
+    cout<<ans<<endl;  
+
+    return 0;
+}
