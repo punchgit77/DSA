@@ -1,0 +1,19 @@
+#include <iostream>
+
+int mod(int a,int b){
+   
+   if(b<=0) return -1;
+
+   int div = a/b;
+   
+   return a - (div*b);
+    
+}
+int main() {
+    // Write C++ code here
+    int a,b;std::cin>>a>>b;
+    
+    std::cout << mod(a,b);
+
+    return 0;
+}
