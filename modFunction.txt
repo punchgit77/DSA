@@ -16,4 +16,4 @@ int main() {
     std::cout << mod(a,b);
 
     return 0;
-}
+};
